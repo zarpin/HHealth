@@ -1,12 +1,15 @@
 import sqlite3
 import pandas as pd
+
+
 def create_db(dbname='master.db'):
     try:
         conn = sqlite3.connect(dbname)
         cur = conn.cursor()
         return cur, conn
-    except:
-        raise Exception("DB creation error")
+    except Exception:
+        raise ValueError("DB creation error")
+
 
 def create_table(cur, conn):
     try:
@@ -15,16 +18,15 @@ def create_table(cur, conn):
                                joined_league int , sport  text, company_name text)''')
         conn.commit()
         return True
-    except:
-        raise Exception("Table creation error")
+    except Exception:
+        raise ValueError("Table creation error")
 
 
-def insert_db(cur, conn, data_to_insert):
+def insert_db(conn, data_to_insert):
     try:
         data_to_insert.to_sql('sports', conn, if_exists='append', index=False)
         pd.read_sql('select * from sports', conn)
         conn.commit()
         conn.close()
-
-    except:
-        raise Exception("Table creation error")
+    except Exception:
+        raise ValueError("Table creation error")

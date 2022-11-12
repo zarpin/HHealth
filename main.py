@@ -1,18 +1,15 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 from driver import datamunging, dbdrive
 
 
+# Driver function initiation
 def initiation(val):
     print(val)
     db_insert_values = datamunging()
-    dbdrive(db_insert_values)
+    return_val = dbdrive(db_insert_values)
+    if return_val:
+        print('db insertion success')
 
 
-# Press the green button in the gutter to run the script.
+# Main Initiation
 if __name__ == '__main__':
     initiation('Run Initiated')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
